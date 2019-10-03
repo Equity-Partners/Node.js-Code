@@ -1,0 +1,85 @@
+﻿<html>
+<head>
+<meta charset="utf-8">
+<title><%=title%></title>
+<script src="/public/scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+function deleteUser(_id){
+	if(confirm('确定要删除吗？')){
+		$.ajax({
+			url:'/admin/user/delete',
+			type:'post',
+			data:{id:_id},
+			success:function(ret){
+				if(ret.success){
+					window.location.reload();
+				}else{
+					alert(ret.msg);
+				}
+			},
+			error:function(){
+				alert('网络错误');
+			}
+		});
+	}
+}
+
+function toDateString(date){
+	if(date == null) return '';
+	
+	var d = date;
+	var year = d.getFullYear();
+	var month = d.getMonths();
+	var day = d.getDate();
+	var hour = d.getHours();
+	var minute = d.getMinutes();
+	var second = d.getSeconds();
+	if(month < 10){
+		month = '0' + month;
+	}	
+	if(day < 10){
+		day = '0' + day;
+	}	
+	if(hour < 10){
+		hour = '0' + hour;
+	}	
+	if(minute < 10){
+		minute = '0' + minute;
+	}	
+	if(second < 10){
+		second = '0' + second;
+	}	
+	
+	return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+}
+</script>
+</head>
+<body>
+<h1>您好</h1>
+<div>
+<a href="/admin/user/create">创建用户</a>
+</div>
+<table>
+<thead>
+<tr>
+<th>用户名</th><th>创建时间</th><th>修改时间</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+
+<%
+	for(var i=0;i<users.length;i++){
+		var user = users[i];
+%>
+<tr>
+	<td><%=user.username%></td>
+	<td><%=moment(user.createDate).format('YYYY-MM-DD HH:mm:ss')%></td>
+	<td><%=(user.lastModifyDate == null ? '' : moment(user.lastModifyDate).format('YYYY-MM-DD HH:mm:ss')) %></td>
+	<td><a href="javascript:void(deleteUser('<%=user._id%>'))">删除</a><a href="/admin/user/modify_password?_id=<%=user._id%>">修改密码</a></td>
+</tr>
+<%}%>
+</tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,69 @@
+﻿<html>
+<head>
+<meta charset="utf-8">
+<title><%=title%></title>
+<script src="/public/scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#btnPost').click(function(){
+		var UserName = $.trim($('#txtUserName').val());
+		var Password = $.trim($('#txtPassword').val());
+		var ConfirmPassword = $.trim($('#txtConfirmPassword').val());
+		var Head = $.trim($('#fileHead').val());
+		
+		if(UserName==''){
+			alert('请输入用户名');
+			return false;
+		}
+		
+		if(Password==''){
+			alert('请输入密码');
+			return false;
+		}
+		
+		if(ConfirmPassword==''){
+			alert('请输入确认密码');
+			return false;
+		}
+		
+		if(Password != ConfirmPassword){
+			alert('密码与确认密码不一致');
+			return false;
+		}
+		
+		return true;
+	});
+});
+</script>
+</head>
+<body>
+<h1>您好</h1>
+<div>
+<form id="form" name="form" action="/admin/user/create" method="post" enctype="multipart/form-data" target="ifrm">
+<table>
+<tbody>
+<tr>
+<td>用户名：</td><td><input type="text" id="txtUserName" name="UserName" value="" /></td>
+</tr>
+<tr>
+<td>密码：</td><td><input type="password" id="txtPassword" name="Password" value="" /></td>
+</tr>
+<tr>
+<td>确认密码：</td><td><input type="password" id="txtConfirmPassword" value="" /></td>
+</tr>
+<tr>
+<td>头像：</td><td><input type="file" id="fileHead" name="Head" /></td>
+</tr>
+<tr>
+<td>头像2：</td><td><input type="file" id="fileHead2" name="Head" /></td>
+</tr>
+<td colspan="2"><input type="submit" value="提交" id="btnPost" /></td>
+</tr>
+</tbody>
+</table>
+</form>
+</div>
+<iframe id="ifrm" name="ifrm" style="display:none;" src="about:blank"></iframe>
+</body>
+
+</html>
