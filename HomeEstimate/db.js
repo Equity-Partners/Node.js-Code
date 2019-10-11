@@ -1,5 +1,5 @@
 ﻿'use strict';
-var log4js = require('log4js');
+var log4js = global.log4js;
 var logger = log4js.getLogger('default');
 var md5 = require("md5");
 
@@ -39,7 +39,7 @@ db.Contact = mongoose.model('Contact', {
         oneWeekChange: { type: Boolean, default: null },
         valueChange: { type: Number, default: null },
         valueChangeDuration: { type: Number, default: null },
-        formularCalcPrice: { type: Number, default: null }, //the result of formular calculating
+        
         street: { type: String, default: null },
         zipcode: { type: Number, default: null },
         city: { type: String, default: null },
@@ -59,7 +59,9 @@ db.Contact = mongoose.model('Contact', {
         lastSoldPrice: { type: Number, default: null },
         lowValuation: { type: Number, default: null },
         highValuation: { type: Number, default: null },
-        percentile: { type: Number, default: null }
+        percentile: { type: Number, default: null },
+        estimatePrice: { type: Number, default: null },
+        formularCalcPrice: { type: Number, default: null } //the result of formular calculating
     }],
     isAgreeToUse: { type: Boolean, default: true }, //do the user allow you to use the information of commiting
     givePercent: { type: Number, default: 100 }, // the percentage of giving price to the platform, default to set 100

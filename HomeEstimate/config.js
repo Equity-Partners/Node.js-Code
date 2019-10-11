@@ -7,7 +7,8 @@ var config = {
     getZwsApiUrl: function (address, citystatezip) {
         return format(config.zwsApiUrl, address, citystatezip);
     },
-    port: 8081
+    port: 8081,
+    jwt_secret: 'home-estimate-1diefhch3'
 }
 
 module.exports = config;
